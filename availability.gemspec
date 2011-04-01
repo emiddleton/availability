@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "availability"
   s.version     = Availability::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.authors     = ["Edward Middleton"]
+  s.email       = ["edward.middleton@vortorus.net"]
+  s.homepage    = "https://github.com/emiddleton/availability"
+  s.summary     = %q{convert local to utc offsets}
+  s.description = %q{Convert weekly utc offsets to and from local times.}
 
   s.rubyforge_project = "availability"
 
