@@ -141,7 +141,7 @@ module Availability
         hash[start_day] << [start_str,finish_str]
       end
       hash
-    end 
+    end.inject({}){|h,a|h[a[0]] = a[1].sort;h}
   end
 
 
