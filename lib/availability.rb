@@ -63,7 +63,7 @@ module Availability
         end
       elsif finish_time_utc > end_of_utc_week
         ary << [to_utc_offset(start_time_utc),nil]
-        ary << [nil,to_utc_offset(start_of_utc_week+finish_time_utc-end_of_utc_week)]
+        ary << [nil,to_utc_offset(start_of_utc_week+(finish_time_utc-end_of_utc_week))]
       else
         ary << [to_utc_offset(start_time_utc),to_utc_offset(finish_time_utc)]
       end
