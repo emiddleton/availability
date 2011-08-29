@@ -17,6 +17,7 @@ module Availability
   end
 
   def availability_merge(head, rest, res)  
+    return [] if head == nil
     return res << head if rest.count == 0
     if head[1] < rest[0][0]
       availability_merge(rest.shift, rest, res << head)
