@@ -123,12 +123,12 @@ module Availability
     time_offset_ranges.inject({}) do |hash,v|
       start_time = start_of_week + v[0]
       finish_time = start_of_week + v[1]
-      start_day = I18n.l(start_time, :format=>'%A')
+      start_day = start_time.strftime('%u')
       hash[start_day] = [] if hash[start_day].nil?
 
       # handle split over two days.
       if (start_time.wday != finish_time.wday) and finish_time.strftime('%R') != '00:00'
-        finish_day = I18n.l(finish_time, :format=>'%A')
+        finish_day = finish_time.strftime('%u')
         start_str  = start_time.strftime('%R')
         finish_str = finish_time.strftime('%R')
         hash[finish_day] = [] if hash[finish_day].nil?
