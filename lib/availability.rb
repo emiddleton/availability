@@ -9,6 +9,7 @@ module Availability
     "4" => 3.days.to_i,
     "5" => 4.days.to_i,
     "6" => 5.days.to_i,
+    "7" => 6.days.to_i,
     "0" => 6.days.to_i
   }
 
@@ -111,6 +112,7 @@ module Availability
           end
         rescue Exception => e
           logger.warn e.message
+          logger.warn e.backtrace.join('\n')
         end
       end
       ary
