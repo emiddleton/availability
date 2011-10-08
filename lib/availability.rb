@@ -106,6 +106,7 @@ module Availability
                 raise "invalid finish time %s" % time_range
               end
 
+            raise "start time should be before end time" if start_offset >= finish_offset
             ary << [start_offset, finish_offset]
           else
             logger.warn "invalid time range %s" % time_range
