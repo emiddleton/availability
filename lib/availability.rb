@@ -56,26 +56,17 @@ module Availability
       start_time_utc  = (start_of_local_week + v[0]).utc
       finish_time_utc = (start_of_local_week + v[1]).utc
 
-      if start_time_utc < start_of_utc_week
-        if finish_time_utc > end_of_utc_week
-          ary << [0, 7.days.to_i]
-        elsif finish_time_utc < end_of_utc_week
-          ary << [to_utc_offset(end_of_utc_week + (start_time_utc - start_of_utc_week)),to_utc_offset(end_of_utc_week + (finish_time_utc - start_of_utc_week))]
-        else
-          ary << [to_utc_offset(end_of_utc_week + (start_time_utc - start_of_utc_week)),nil]
-          ary << [nil,to_utc_offset(finish_time_utc)]
-        end
-      elsif finish_time_utc > end_of_utc_week
-        if start_time_utc > end_of_utc_week
-          ary << [to_utc_offset(start_of_utc_week+(start_time_utc-end_of_utc_week)),to_utc_offset(start_of_utc_week+(finish_time_utc-end_of_utc_week))]
-        else
-          ary << [to_utc_offset(start_time_utc),nil]
-          ary << [nil,to_utc_offset(start_of_utc_week+(finish_time_utc-end_of_utc_week))]
-        end
+      start_time_utc = start_of_utc_week + (start_time_utc - start_of_utc_week) % 7.days.to_i
+      finish_time_utc = start_of_utc_week + (finish_time_utc - start_of_utc_week) % 7.days.to_i
+
+      if start_time_utc > finish_time_utc
+        ary << [nil, to_utc_offset(finish_time_utc)]
+        ary << [to_utc_offset(start_time_utc), nil]
       else
-        ary << [to_utc_offset(start_time_utc),to_utc_offset(finish_time_utc)]
+        ary << [to_utc_offset(start_time_utc), to_utc_offset(finish_time_utc)]
       end
-    end.sort_by{|a|a[0].to_i}
+
+     end.sort_by{|a|a[0].to_i}
   end
 
   def to_utc_offset(value)
